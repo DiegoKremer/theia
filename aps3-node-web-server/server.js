@@ -2,6 +2,7 @@ const express = require('express'); // Carrega Express
 const hbs = require('hbs'); // Carrega Handlebars para templates
 const fs = require('fs'); // Carrega o modulo File System
 
+const port = process.env.PORT || 3000;
 // Cria um novo app Express
 var app = express();
 
@@ -63,8 +64,8 @@ app.get('/erro', (req, res) => {
 
 
 // Conecta a aplicação em uma porta da máquina
-app.listen(3000, () => {
-    console.log('O servidor está rodando na porta 3000');
+app.listen(port, () => {
+    console.log(`O servidor está rodando na porta ${port}`);
 });
 
 
