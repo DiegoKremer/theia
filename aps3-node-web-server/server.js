@@ -12,14 +12,20 @@ app.use(express.static(__dirname + '/public'));
 
 // Cria um handler para a request HTTP
 app.get('/', (req, res) => {
-    //res.send('<h1>Olá Express</h1>')
-    res.send({
-        name: 'Diego',
-        likes: [
-            'Technology',
-            'Travel'
-        ]
-    });
+    res.render('principal.hbs', {
+        welcomeMessage: 'Bem vindo à Página Principal',
+        pageTitle: 'Pagina Principal',
+        currentYear: new Date().getFullYear()
+    })
+
+    // //res.send('<h1>Olá Express</h1>')
+    // res.send({
+    //     name: 'Diego',
+    //     likes: [
+    //         'Technology',
+    //         'Travel'
+    //     ]
+    // });
 });
 
 // Cria um handler para página Sobre
