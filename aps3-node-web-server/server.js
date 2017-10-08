@@ -1,7 +1,6 @@
-// Carrega Express
-const express = require('express');
-// Carrega Handlebars para templates
-const hbs = require('hbs');
+const express = require('express'); // Carrega Express
+const hbs = require('hbs'); // Carrega Handlebars para templates
+const fs = require('fs'); // Carrega o modulo File System
 
 // Cria um novo app Express
 var app = express();
@@ -10,6 +9,19 @@ hbs.registerPartials(__dirname + '/views/partials');
 app.set('view engine', 'hbs');
 // Configura caminho no servidor
 app.use(express.static(__dirname + '/public'));
+
+app.use((req, res, next) => {
+    var now = new Date().toString(); 
+    var log = `${now}: ${req.method} ${req.url}`
+
+    console.log(log)
+    fs.appendFile('server.log', log + '\n', (err) => {
+        if (err) {
+            console.log('Não foi possível gravar em server.log')
+        }
+    });
+    next(); 
+})
 
 // Retorna o ano atual
 hbs.registerHelper('getCurrentYear', () => {
