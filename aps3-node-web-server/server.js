@@ -7,9 +7,8 @@ var app = express();
 
 hbs.registerPartials(__dirname + '/views/partials');
 app.set('view engine', 'hbs');
-// Configura caminho no servidor
-app.use(express.static(__dirname + '/public'));
 
+// Salva logs de requests
 app.use((req, res, next) => {
     var now = new Date().toString(); 
     var log = `${now}: ${req.method} ${req.url}`
@@ -22,6 +21,13 @@ app.use((req, res, next) => {
     });
     next(); 
 })
+
+// Carrega página de manutenção
+// app.use((req, res, next) => {
+//     res.render('manutencao.hbs');
+// })
+
+app.use(express.static(__dirname + '/public'));
 
 // Retorna o ano atual
 hbs.registerHelper('getCurrentYear', () => {
