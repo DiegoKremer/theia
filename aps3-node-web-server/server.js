@@ -1,9 +1,12 @@
 // Carrega Express
 const express = require('express');
+// Carrega Handlebars para templates
+const hbs = require('hbs');
 
 // Cria um novo app Express
 var app = express();
 
+app.set('view engine', 'hbs')
 // Configura caminho no servidor
 app.use(express.static(__dirname + '/public'));
 
@@ -21,7 +24,10 @@ app.get('/', (req, res) => {
 
 // Cria um handler para página Sobre
 app.get('/sobre', (req, res) => {
-    res.send('Página Sobre')
+    res.render('sobre.hbs', {
+        pageTitle: 'Pagina Sobre',
+        currentYear: new Date().getFullYear()
+    });
 });
 
 // Cria um handler para página de erro com JSON
